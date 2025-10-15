@@ -7,7 +7,10 @@ on:
   pull_request:
     branches:
       - main
-
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -34,3 +37,30 @@ jobs:
         with:
           name: karate-html-report
           path: target/karate-reports
+  deploy-report:
+    needs: test
+    runs-on: ubuntu-latest
+    
+    # Configurar el entorno de despliegue
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: karate-html-report
+          path: report-public/
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        
+      - name: Upload Report to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'report-public/'
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
