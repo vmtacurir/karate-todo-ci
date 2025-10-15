@@ -12,8 +12,8 @@ Scenario: 1. Get all initial todos (Verifica que el servicio esté activo)
 
 Scenario: 2. Basic todo flow (Crear un nuevo TODO)
     # Crea un TO-DO usando el endpoint definido en Background
-    Given request {title: "Primera Tarea", complete: false}
+    Given request {title: "Tarea 1", complete: false}
     When method post
     Then status 200
     # Opcional: Podemos validar el contenido de la respuesta
-    And match response.title == 'Primera Tarea'
+    And match response.title == 'Tarea 1'
