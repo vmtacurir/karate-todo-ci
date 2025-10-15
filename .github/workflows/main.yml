@@ -19,7 +19,7 @@ jobs:
 
       # 2️⃣ Configurar Java 17 (necesario para Karate)
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -30,7 +30,7 @@ jobs:
 
       # 4️⃣ Guardar el reporte HTML generado
       - name: Upload Karate HTML Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: karate-html-report
           path: target/karate-reports
