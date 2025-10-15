@@ -52,6 +52,17 @@ jobs:
         with:
           name: karate-html-report
           path: report-public/
+      
+      - name: Prepare index.html for GitHub Pages
+        run: |
+          cd report-public
+          if [ -f "karate-summary.html" ]; then
+            cp karate-summary.html index.html
+          else
+            echo "Error: karate-summary.html not found"
+            ls -la
+            exit 1
+          fi
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
