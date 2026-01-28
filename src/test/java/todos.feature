@@ -3,7 +3,8 @@ Feature: Karate Basic Todos API
 
 Background:  
     # Esta URL base se aplica a todos los Scenarios debajo
-    * url 'http://localhost:8080/api/todos'
+    * def urlBase = karate.properties['url.base']
+    * url urlBase + '/api/todos'
 
 Scenario: 1. Get all initial todos (Verifica que el servicio esté activo)
     # Usa la URL definida en Background
